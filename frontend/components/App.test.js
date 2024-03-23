@@ -3,6 +3,8 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from './App'
 
+const { en: en, esp: esp } = require('../i18n/index.json');
+
 describe('Module 4 Project Tests', () => {
   describe('English Language', () => {
     /*
@@ -10,10 +12,19 @@ describe('Module 4 Project Tests', () => {
 
       One test is done for you as an example.
     */
-    test(`TEXT_HEADING_CREATE_ACCOUNT is visible`, () => {
-      render(<App lang="en" />)
-      expect(screen.getByText("Create an Account")).toBeVisible()
-    })
+    for (const key in en) {
+      if (key === 'PLACEHOLDER_USERNAME') {
+        test(`${key} is visible`, () => {
+          render(<App lang='en' />);
+          expect(screen.getByPlaceholderText(`${en[key]}`)).toBeVisible();
+        })
+      } else {
+        test(`${key} is visible`, () => {
+          render(<App lang='en' />);
+          expect(screen.getByText(`${en[key]}`)).toBeVisible();
+        })
+      }
+    }
   })
   describe('Spanish Language', () => {
     /*
