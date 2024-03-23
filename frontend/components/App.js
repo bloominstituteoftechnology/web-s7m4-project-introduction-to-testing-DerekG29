@@ -2,17 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
 import schemas from '../../shared/schemas'
+import languages from '../i18n/index.json';
 
-/*
-  👉 TASK 2
-
-  Implement internationalization!
-
-  This is commonly done using libraries such as `react-i18next` or `react-intl`
-  But today you will do it "by hand" using the JSON file inside the `i18n` folder
-*/
-
-const { en: en, esp: esp } = require('../i18n/index.json');
 const getInitialValues = () => ({ username: '', favLanguage: '', favFood: '', agreement: false })
 const getInitialValidation = () => ({ username: '', favLanguage: '', favFood: '', agreement: '' })
 
@@ -28,7 +19,7 @@ export default function App({ lang = 'en' }) {
   const [failure, setFailure] = useState()
   const [submitAllowed, setSubmitAllowed] = useState(false)
 
-  const currentLang = language === 'en' ? en : esp;
+  const currentLang = languages[language];
 
   useEffect(() => {
     schemas.userSchema.isValid(values).then(setSubmitAllowed)
