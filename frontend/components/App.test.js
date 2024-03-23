@@ -32,6 +32,19 @@ describe('Module 4 Project Tests', () => {
 
       This is done after making the UI multilingual.
     */
+      for (const key in en) {
+        if (key === 'PLACEHOLDER_USERNAME') {
+          test(`${key} is visible`, () => {
+            render(<App lang='esp' />);
+            expect(screen.getByPlaceholderText(`${esp[key]}`)).toBeVisible();
+          })
+        } else {
+          test(`${key} is visible`, () => {
+            render(<App lang='esp' />);
+            expect(screen.getByText(`${esp[key]}`)).toBeVisible();
+          })
+        }
+      }
   })
   describe('getEntriesByKeyPrefix', () => {
     test('can extract the correct data', () => {
